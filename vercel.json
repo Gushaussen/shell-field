@@ -1,1 +1,1 @@
-{"version":2,"buildCommand":"node automation-build.mjs","outputDirectory":"public"}
+{"version":2,"buildCommand":"node profile-build.mjs","outputDirectory":"public"}
