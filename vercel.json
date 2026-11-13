@@ -1,1 +1,1 @@
-{"version":2,"buildCommand":"node interface-build.mjs","outputDirectory":"public"}
+{"version":2,"buildCommand":"node organic-build.mjs","outputDirectory":"public"}
