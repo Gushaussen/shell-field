@@ -1,1 +1,1 @@
-{"version":2,"buildCommand":"node particle-build.mjs","outputDirectory":"public"}
+{"version":2,"buildCommand":"node library-build.mjs","outputDirectory":"public"}
