@@ -17,9 +17,9 @@
   }
   const style = document.createElement('style');
   style.textContent = `
-    #studioWorkspaceTitle{font-size:16px;font-weight:700;line-height:1.45;letter-spacing:1px;margin:0 0 18px;color:var(--text,var(--b))}
+    #studioWorkspaceTitle{font-size:13px;font-weight:700;line-height:1.45;letter-spacing:1px;margin:0 0 18px;color:var(--text,var(--b))}
     .work > header .studio-geometry-tagline{max-width:100%;white-space:normal;overflow-wrap:break-word;line-height:1.5;letter-spacing:.35px}
-    @media(max-width:650px){#studioWorkspaceTitle{font-size:15px}}
+    @media(max-width:650px){#studioWorkspaceTitle{font-size:13px}}
   `;
   document.head.append(style);
 })();
