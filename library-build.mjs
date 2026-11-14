@@ -7,11 +7,14 @@ let save=fs.readFileSync('library-save.js','utf8'),windowCode=fs.readFileSync('l
 const stateMarker='libraryPreviewData={positions,colors:rgb,count};';
 if(!windowCode.includes(stateMarker))throw Error('Library snapshot retention point missing');
 windowCode=windowCode.replace(stateMarker,'libraryPreviewData={positions,colors:rgb,count,snapshot:data,record:structuredClone(record),revision:libraryRevision};');
+const cardMarker='card.append(title,info,button);';
+if(!windowCode.includes(cardMarker))throw Error('Library card deletion insertion point missing');
+windowCode=windowCode.replace(cardMarker,"const deleteButton=document.createElement('button');deleteButton.textContent='DELETE SPECIMEN';deleteButton.onclick=()=>prepareSpecimenDeletion(record);card.append(title,info,button,deleteButton);");
 const settingsMarker="'bgTolerance','profileTolerance'";
 if(!save.includes(settingsMarker))throw Error('Library settings capture point missing');
 save=save.replace(settingsMarker,"'bgTolerance','ridgeGain','fineGain','profileTolerance'");
 const provenanceMarker='schemaVersion:1,units:';
 if(!save.includes(provenanceMarker))throw Error('Library provenance capture point missing');
 save=save.replace(provenanceMarker,'schemaVersion:1,sourceSpecimen:workspaceLibrarySource,units:');
-html=html.replace(marker,[save,windowCode,fs.readFileSync('library-workspace.js','utf8')].join('\n')+'\n'+marker);
+html=html.replace(marker,[save,windowCode,fs.readFileSync('library-workspace.js','utf8'),fs.readFileSync('library-delete.js','utf8')].join('\n')+'\n'+marker);
 fs.writeFileSync('public/index.html',html);
