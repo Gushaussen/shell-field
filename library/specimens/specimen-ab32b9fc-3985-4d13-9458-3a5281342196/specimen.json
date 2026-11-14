@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "id": "specimen-ab32b9fc-3985-4d13-9458-3a5281342196",
+  "name": "Smaller Oyster",
+  "species": "Magallana gigas",
+  "location": "Agerø Limfjord",
+  "notes": "Shouldn't be as pronounced as it looks.",
+  "lengthMm": 100,
+  "pointCount": 300512,
+  "createdAt": "2026-11-14T18:41:50.856Z",
+  "approximateGeometry": true,
+  "archive": {
+    "encoding": "gzip-json",
+    "sha256": "a03ad23ca73809ab40c3a3747dc789a83185ed3a070b1ca478bd9d36ad5bc86f",
+    "bytes": 12735713,
+    "parts": [
+      {
+        "path": "archive-000.bin",
+        "sha": "a553aa8aeaa7cd222e76e64017b8150ef0cfce6b",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-001.bin",
+        "sha": "b6a96665349fa53c37d430c8887e7f7b69b23d7a",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-002.bin",
+        "sha": "cc07702fea87c88ebcfe9d1c2b52aed98e1e7eed",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-003.bin",
+        "sha": "1e15c290a1bc471b8816a552b051461d1cb8f072",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-004.bin",
+        "sha": "928878addea638f19cd122e44cda3f2fbaca2c55",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-005.bin",
+        "sha": "775ec109cd85ffd2fa46eb0555451c6eae4a1ffd",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-006.bin",
+        "sha": "c813eb7df61dd1356b19eea2097aaf60ac41e823",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-007.bin",
+        "sha": "79bbd3ed150b1ffbcdc7f28dec324b865ad1e1b4",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-008.bin",
+        "sha": "60e77a0b1209b5a158ae46775b504d964e0e328c",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-009.bin",
+        "sha": "120a2483d943a5c37d4e44dabe00372682200e01",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-010.bin",
+        "sha": "f9fc2b0cf990f80b56d3a7438a6e6a39085ee81c",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-011.bin",
+        "sha": "ac9da6e82991db039cec75a7e09f318c4be35223",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-012.bin",
+        "sha": "b1f76848f8dab7a46b4979647a4dffc0020ff9c7",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-013.bin",
+        "sha": "9134434dbb88d60b5128e51bae97f182f26363c0",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-014.bin",
+        "sha": "b7842b197bdcfbc313d2ffb5ce7a317a00ef5981",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-015.bin",
+        "sha": "d306998750b872ab869682cef931ba93d6e23b65",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-016.bin",
+        "sha": "011e4472a9f0c5e746b852d8ef1cc7805ad1a78a",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-017.bin",
+        "sha": "c968e4b6de0ee15f964bd00b1547d11aae543d52",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-018.bin",
+        "sha": "6f13a46998074105c45a410127797f6fa1e5a15d",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-019.bin",
+        "sha": "4e8310fd7e5a89c3d9dae0fcea7c824e1ad8a62f",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-020.bin",
+        "sha": "a364b8c0d85d7c706863e417977e354691a38d6b",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-021.bin",
+        "sha": "6f7a6695ed0fe322cb5ee9cd54b7b04c41087044",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-022.bin",
+        "sha": "0f4d8fc6da6979e66ea76403c002b07ea688cd0a",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-023.bin",
+        "sha": "182fbbb54e48eea3a8f26872482411de158291ad",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-024.bin",
+        "sha": "cf12d14852f453f848daafc80e29bbea495b80a7",
+        "bytes": 152801
+      }
+    ]
+  }
+}
