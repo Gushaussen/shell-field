@@ -32,6 +32,18 @@
       height: 100%;
       pointer-events: none;
       z-index: -1;
+      opacity: 0;
+      transition: opacity 180ms ease;
+    }
+
+    .grain-button:hover canvas {
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .grain-button canvas {
+        transition: none;
+      }
     }
   `;
   document.head.appendChild(style);
@@ -44,6 +56,7 @@
 
     const ctx = canvas.getContext('2d');
     let width = 0, height = 0, grains = [];
+    let animationId = null;
     const count = 36;
 
     const resize = () => {
@@ -83,16 +96,32 @@
       ctx.globalAlpha = 1;
     };
 
-    const animate = () => {
-      draw();
-      if (!reduced) requestAnimationFrame(animate);
+    const start = () => {
+      if (animationId || reduced) return;
+      const animate = () => {
+        draw();
+        animationId = requestAnimationFrame(animate);
+      };
+      animationId = requestAnimationFrame(animate);
     };
+
+    const stop = () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+      ctx.clearRect(0, 0, width, height);
+    };
+
+    button.addEventListener('mouseenter', start);
+    button.addEventListener('mouseleave', stop);
+    button.addEventListener('focus', start);
+    button.addEventListener('blur', stop);
 
     new ResizeObserver(resize).observe(button);
     resize();
-    if (reduced) draw(); else requestAnimationFrame(animate);
 
-    return {resize, draw};
+    return {resize, stop};
   };
 
   buttons.forEach(button => {
