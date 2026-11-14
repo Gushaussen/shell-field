@@ -27,9 +27,9 @@
 
     .grain-button canvas {
       position: absolute;
-      inset: -1px;
-      width: calc(100% + 2px);
-      height: calc(100% + 2px);
+      inset: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
       z-index: -1;
     }
@@ -44,20 +44,20 @@
 
     const ctx = canvas.getContext('2d');
     let width = 0, height = 0, grains = [];
-    const count = 34;
+    const count = 36;
 
     const resize = () => {
       const rect = button.getBoundingClientRect();
       const dpr = Math.min(devicePixelRatio || 1, 2);
-      width = rect.width + 2;
-      height = rect.height + 2;
+      width = rect.width;
+      height = rect.height;
       canvas.width = Math.max(1, width * dpr);
       canvas.height = Math.max(1, height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       grains = Array.from({length: count}, () => ({
         angle: Math.random() * Math.PI * 2,
         speed: 0.0025 + Math.random() * 0.003,
-        distance: -0.5 + Math.random() * 0.5,
+        distance: -(2 + Math.random() * 3),
         wobble: Math.random() * Math.PI * 2,
         size: 1.2 + Math.random() * 0.7,
         alpha: 0.18 + Math.random() * 0.22
