@@ -27,9 +27,9 @@
 
     .grain-button canvas {
       position: absolute;
-      inset: -4px;
-      width: calc(100% + 8px);
-      height: calc(100% + 8px);
+      inset: -1px;
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
       pointer-events: none;
       z-index: -1;
     }
@@ -44,20 +44,20 @@
 
     const ctx = canvas.getContext('2d');
     let width = 0, height = 0, grains = [];
-    const count = 30;
+    const count = 34;
 
     const resize = () => {
       const rect = button.getBoundingClientRect();
       const dpr = Math.min(devicePixelRatio || 1, 2);
-      width = rect.width + 8;
-      height = rect.height + 8;
+      width = rect.width + 2;
+      height = rect.height + 2;
       canvas.width = Math.max(1, width * dpr);
       canvas.height = Math.max(1, height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       grains = Array.from({length: count}, () => ({
         angle: Math.random() * Math.PI * 2,
         speed: 0.0025 + Math.random() * 0.003,
-        distance: 0.5 + Math.random() * 1.5,
+        distance: -0.5 + Math.random() * 0.5,
         wobble: Math.random() * Math.PI * 2,
         size: 1.2 + Math.random() * 0.7,
         alpha: 0.18 + Math.random() * 0.22
@@ -69,11 +69,11 @@
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
       const cx = width / 2, cy = height / 2;
-      const rx = width / 2 - 2, ry = height / 2 - 2;
+      const rx = width / 2, ry = height / 2;
       const paint = color();
       for (const g of grains) {
         g.angle += g.speed;
-        const wobble = Math.sin(g.angle * 5 + g.wobble) * 1.8;
+        const wobble = Math.sin(g.angle * 5 + g.wobble) * 1.2;
         const x = cx + Math.cos(g.angle) * (rx + g.distance + wobble);
         const y = cy + Math.sin(g.angle) * (ry + g.distance + wobble);
         ctx.globalAlpha = g.alpha;
