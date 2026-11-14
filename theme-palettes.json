@@ -1,0 +1,6 @@
+[
+  {"id":"cream-red","label":"CREAM / RED","palette":{"page":"#A82432","panel":"#A82432","text":"#FFF1D6","accent":"#FFF1D6","line":"#CC6A70","soft":"#B83A46","on":"#A82432","grid":"#CC6A70","minor":"#B83A46"}},
+  {"id":"pink-purple","label":"HOT PINK / PURPLE","palette":{"page":"#351052","panel":"#351052","text":"#FFE5F5","accent":"#FF69C8","line":"#85437F","soft":"#4D1D69","on":"#351052","grid":"#85437F","minor":"#4D1D69"}},
+  {"id":"sky-white","label":"SKY BLUE / WHITE","palette":{"page":"#FFFFFF","panel":"#FFFFFF","text":"#1675B8","accent":"#1675B8","line":"#BBDFF5","soft":"#EAF6FF","on":"#FFFFFF","grid":"#BBDFF5","minor":"#EAF6FF"}},
+  {"id":"cream-sea","label":"CREAM / DEEP SEA","palette":{"page":"#073F3C","panel":"#073F3C","text":"#FFF1D6","accent":"#FFF1D6","line":"#56817A","soft":"#16534D","on":"#073F3C","grid":"#56817A","minor":"#16534D"}}
+]
