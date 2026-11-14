@@ -1,5 +1,5 @@
 const particleStyle=document.createElement('style');particleStyle.textContent=`
-button{isolation:isolate;position:relative;overflow:visible!important;background:transparent!important;background-image:none!important;color:var(--b,#0648ff)!important;border:1px solid transparent!important;border-radius:10px!important;box-shadow:none!important;transform:none!important;min-height:44px;padding:13px 21px;transition:color 150ms ease!important}
+button{isolation:isolate;position:relative;overflow:visible!important;background:transparent!important;background-image:none!important;color:var(--b,#0648ff)!important;border:1px solid transparent!important;border-radius:10px!important;box-shadow:none!important;transform:none!important;min-height:44px;padding:13px 21px;transition:color 150ms ease,font-weight 150ms ease!important;font-weight:400}
 button::before{content:'';position:absolute;inset:-18px;z-index:-1;pointer-events:none;border-radius:10px;opacity:0;transform:translateY(4px) scale(.97,.95);transition:opacity 220ms ease,transform 360ms cubic-bezier(.16,1,.3,1);background-image:var(--sf-particles,none);background-size:100% 100%;background-position:center;background-repeat:no-repeat;animation:sf-particle-drift 5s linear infinite alternate}
 @keyframes sf-particle-drift{0%{background-position:0% 0%}100%{background-position:100% 100%}}
 button:focus-visible{color:#fff!important;outline:2px solid var(--b,#0648ff)!important;outline-offset:5px}button:focus-visible::before{opacity:1;transform:translateY(0) scale(1)}
@@ -7,7 +7,7 @@ button:not(:disabled):active{color:#fff!important}button:not(:disabled):active::
 button:disabled{opacity:.4;cursor:not-allowed}button:disabled::before{opacity:0!important}
 button.sf-help,#largeProfileDialog button.sf-help{min-height:32px!important;padding:7px 13px!important;opacity:1}
 button.selected,button[aria-pressed="true"]{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
-@media(hover:hover){button:not(:disabled):hover{color:#fff!important;transform:none!important;box-shadow:none!important}button:not(:disabled):hover::before{opacity:1;transform:translateY(0) scale(1)}button:not(:disabled):active:hover::before{transform:translateY(1px) scale(.97,.95)}}
+@media(hover:hover){button:not(:disabled):hover{color:#fff!important;transform:none!important;box-shadow:none!important;font-weight:700!important}button:not(:disabled):hover::before{opacity:1;transform:translateY(0) scale(1)}button:not(:disabled):active:hover::before{transform:translateY(1px) scale(.97,.95)}}
 @media(prefers-reduced-motion:reduce){button,button::before{transition:none!important}button::before{transform:none!important;animation:none!important}}
 `;document.head.append(particleStyle);
 const particleNamespace='http://www.w3.org/2000/svg';
