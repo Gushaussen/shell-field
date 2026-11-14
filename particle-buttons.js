@@ -5,109 +5,15 @@
 
   const style = document.createElement('style');
   style.textContent = `
-    :root {
-      --button-bg: white;
-      --button-hover: #edf2ff;
-      --button-border: var(--b);
-      --button-text: var(--b);
-      --primary-bg: var(--b);
-      --primary-text: white;
-      --primary-hover: #0540d9;
-      --field-bg: white;
-      --field-border: var(--l);
-      --field-text: var(--b);
-      --surface-bg: white;
-      --surface-border: var(--l);
-      --surface-text: var(--b);
-    }
-
-    [data-theme="dark"], body[data-theme="dark"] {
-      --button-bg: #0b1530;
-      --button-hover: #132247;
-      --button-border: #3d5cff;
-      --button-text: #dce5ff;
-      --primary-bg: #0540d9;
-      --primary-text: #f4f7ff;
-      --primary-hover: #0648ff;
-      --field-bg: #0b1530;
-      --field-border: #33447a;
-      --field-text: #dce5ff;
-      --surface-bg: #081026;
-      --surface-border: #33447a;
-      --surface-text: #dce5ff;
-    }
-
-    [data-theme="white-cobalt"], body[data-theme="white-cobalt"] {
-      --button-bg: white;
-      --button-hover: #eef3ff;
-      --button-border: #0648ff;
-      --button-text: #0648ff;
-      --primary-bg: #0648ff;
-      --primary-text: white;
-      --primary-hover: #0540d9;
-      --field-bg: white;
-      --field-border: #c9d6ff;
-      --field-text: #0648ff;
-      --surface-bg: white;
-      --surface-border: #c9d6ff;
-      --surface-text: #0648ff;
-    }
-
     button, .button {
-      background: var(--button-bg) !important;
-      border: 1px solid var(--button-border) !important;
+      background: transparent !important;
+      border: 0 !important;
       box-shadow: none !important;
       outline: none !important;
+      border-radius: 0 !important;
       padding: 0 !important;
-      color: var(--button-text) !important;
+      color: inherit !important;
       font-style: italic !important;
-    }
-
-    button:hover, .button:hover {
-      background: var(--button-hover) !important;
-      color: var(--button-text) !important;
-    }
-
-    button.primary, .button.primary,
-    button.selected, .button.selected {
-      background: var(--primary-bg) !important;
-      color: var(--primary-text) !important;
-      border-color: var(--primary-bg) !important;
-    }
-
-    button.primary:hover, .button.primary:hover,
-    button.selected:hover, .button.selected:hover {
-      background: var(--primary-hover) !important;
-      color: var(--primary-text) !important;
-    }
-
-    input[type="number"], select {
-      background: var(--field-bg) !important;
-      color: var(--field-text) !important;
-      border-color: var(--field-border) !important;
-    }
-
-    aside, .card, .card-title, .badge {
-      background: var(--surface-bg) !important;
-      color: var(--surface-text) !important;
-      border-color: var(--surface-border) !important;
-    }
-
-    .section-nav-button {
-      background: var(--button-bg) !important;
-      color: var(--button-text) !important;
-      border-color: var(--button-border) !important;
-    }
-
-    .section-nav-button:hover {
-      background: var(--button-hover) !important;
-      color: var(--button-text) !important;
-    }
-
-    .section-nav-button.active {
-      background: var(--primary-bg) !important;
-      color: var(--primary-text) !important;
-      border-color: var(--primary-bg) !important;
     }
 
     button::before, button::after,
