@@ -33,7 +33,7 @@
         speed: 0.0015 + Math.random() * 0.002,
         distance: 2 + Math.random() * 3,
         wobble: Math.random() * Math.PI * 2,
-        size: 0.6 + Math.random() * 0.5,
+        size: 1.2 + Math.random() * 0.7,
         alpha: 0.18 + Math.random() * 0.22
       }));
     };
