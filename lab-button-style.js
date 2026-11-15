@@ -1,7 +1,7 @@
 function labExportTargetId(mode,format){const targets=mode==='library'?{json:'bbJson',csv:'bbCsv',png:'bbPng'}:{json:'dlJson',csv:'dlCsv',png:'dlPng'};return Object.hasOwn(targets,format)?targets[format]:null}
 (() => {
 const get=id=>document.getElementById(id),layout=get('dlLayout');if(!layout||get('labFinalExport'))return;
-const shapeInput=get('bbShape'),shapeLabel=shapeInput.closest('label');shapeLabel.append(shapeInput);shapeLabel.classList.add('labOutlineToggle');
+const shapeInput=get('bbShape'),shapeLabel=shapeInput.closest('label');shapeLabel.prepend(shapeInput);shapeLabel.classList.add('labOutlineToggle');
 for(const paragraph of shapeLabel.closest('section').querySelectorAll(':scope > p'))if(paragraph.textContent.trim()==='Width profile: image-vertical, not an anatomical axis.')paragraph.remove();
 const section=get('dlJson').closest('section');section.querySelector('h2').textContent='05 / INSPECTING AND EXPORTING';
 for(const id of ['bbJson','bbCsv','bbPng','dlJson','dlCsv','dlPng'])get(id).classList.add('labExportBackend');
