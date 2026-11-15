@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const source=fs.readFileSync(new URL('../studio-form-integration.js',import.meta.url),'utf8');
+const helper=source.match(/^function roundedBowlHeight[^\n]+/m);
+assert.ok(helper,'Rounded generation helper must exist');
+const height=vm.runInNewContext(helper[0]+';roundedBowlHeight');
+test('rounded fallback keeps rim and requested maximum depth',()=>{assert.equal(height(0,.18),0);assert.equal(height(1,.18),-.18)});
+test('a triangular distance field produces a parabolic section',()=>{for(const t of [-1,-.9,-.5,-.01,0,.01,.5,.9,1])assert.ok(Math.abs(height(1-Math.abs(t),.18)+.18*(1-t*t))<1e-12)});
+test('slope approaches zero at maximum depth',()=>{for(const e of [1e-2,1e-3,1e-4])assert.ok(Math.abs((height(1,.18)-height(1-e,.18))/e)<.19*e)});
+test('sampled heights are finite and bounded',()=>{for(let i=0;i<=1000;i++){const y=height(i/1000,.18);assert.ok(Number.isFinite(y)&&y>=-.18-1e-12&&y<=0)}});
+test('invalid inputs are rejected',()=>{assert.throws(()=>height(NaN,.18));assert.throws(()=>height(.5,-.18))});
