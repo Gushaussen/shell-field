@@ -20,7 +20,7 @@ translator=addMeshRepair(translator);
 const scripts=['section-nav.js','tool-switcher.js','fluid-wordmark.js','studio-heading.js'];
 const extras=scripts.map(path=>fs.readFileSync(path,'utf8'));
 const appearance=addLabSpatialColour(addLabFoundation(addLabExportSelection(addLabAppearances(fs.readFileSync('data-extraction-batch.js','utf8'),fs.readFileSync('lab-extraction-viewer.js','utf8')))));
-extras.push(fs.readFileSync('mesh-source-compatibility.js','utf8'),translator,fs.readFileSync('mesh-source-diagnostics.js','utf8'),fs.readFileSync('studio-form-integration.js','utf8'),fs.readFileSync('smooth-bowl.js','utf8'),fs.readFileSync('mesh-section-nav.js','utf8'),fs.readFileSync('data-extraction-lab.js','utf8'),appearance.batch,fs.readFileSync('lab-stock-selector.js','utf8'),appearance.viewer,fs.readFileSync('lab-button-style.js','utf8'));
+extras.push(fs.readFileSync('mesh-source-compatibility.js','utf8'),translator,fs.readFileSync('mesh-source-diagnostics.js','utf8'),fs.readFileSync('studio-form-integration.js','utf8'),fs.readFileSync('smooth-bowl.js','utf8'),fs.readFileSync('mesh-section-nav.js','utf8'),fs.readFileSync('data-extraction-lab.js','utf8'),appearance.batch,fs.readFileSync('lab-stock-selector.js','utf8'),appearance.viewer,fs.readFileSync('lab-button-style.js','utf8'),fs.readFileSync('shell-button-style.js','utf8'));
 html=html.replace(marker,extras.join('\n')+'\n'+marker);
 fs.mkdirSync('public/src',{recursive:true});
 fs.copyFileSync('src/shell-form.mjs','public/src/shell-form.mjs');
