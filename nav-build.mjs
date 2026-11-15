@@ -2,6 +2,7 @@ import './undo-build.mjs';
 import fs from 'node:fs';
 import {addMeshRepair} from './mesh-repair-build.mjs';
 let html=fs.readFileSync('public/index.html','utf8');
+html=html.replace('</style>','#mtControls p.mtNote:not([id]){display:none!important}\n</style>');
 const marker='</script></body>';
 if(!html.includes(marker))throw Error('Navigation insertion point missing');
 const moduleStart='<script type="module">';
