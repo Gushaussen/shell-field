@@ -2,6 +2,7 @@ function labExportTargetId(mode,format){const targets=mode==='library'?{json:'bb
 (() => {
 const get=id=>document.getElementById(id),layout=get('dlLayout');if(!layout||get('labFinalExport'))return;
 const shapeInput=get('bbShape'),shapeLabel=shapeInput.closest('label');shapeLabel.prepend(shapeInput);shapeLabel.classList.add('labOutlineToggle');
+shapeLabel.closest('section').classList.add('labCompactOptions');get('bbPresetControls').closest('section').classList.add('labCompactOptions');
 for(const paragraph of shapeLabel.closest('section').querySelectorAll(':scope > p'))if(paragraph.textContent.trim()==='Width profile: image-vertical, not an anatomical axis.')paragraph.remove();
 const section=get('dlJson').closest('section');section.querySelector('h2').textContent='05 / INSPECTING AND EXPORTING';
 for(const id of ['bbJson','bbCsv','bbPng','dlJson','dlCsv','dlPng'])get(id).classList.add('labExportBackend');
@@ -13,8 +14,16 @@ function update(){const library=mode()==='library';let available=0;for(const opt
 button.onclick=()=>{const backend=target();if(backend&&!backend.disabled)backend.click()};format.onchange=update;
 new MutationObserver(update).observe(layout,{subtree:true,attributes:true,attributeFilter:['disabled','data-lab-mode']});update();
 const style=document.createElement('style');style.textContent=`
-#shell-tool-data #dlControls .labOutlineToggle{display:flex;align-items:center;justify-content:flex-start;gap:8px;margin:2px 0 10px!important}
-#shell-tool-data #dlControls .labOutlineToggle input{display:inline-block;width:auto!important;flex:0 0 auto;margin:0;padding:0}
+#shell-tool-data #dlControls section.labCompactOptions{gap:0;padding:16px 0}
+#shell-tool-data #dlControls section.labCompactOptions>h2{margin:0 0 12px}
+#shell-tool-data #dlControls #bbPresetControls,#shell-tool-data #dlControls fieldset[id$="FoundationControls"]{display:block;border:0;padding:0!important;margin:0!important;min-width:0}
+#shell-tool-data #dlControls #bbPresetControls legend,#shell-tool-data #dlControls fieldset[id$="FoundationControls"] legend{display:block;float:none;padding:0;margin:0 0 8px;line-height:1.5}
+#shell-tool-data #dlControls #bbPresetControls label,#shell-tool-data #dlControls fieldset[id$="FoundationControls"] label{display:flex;align-items:center;gap:8px;min-height:26px;margin:0!important;padding:3px 0!important;line-height:1.5}
+#shell-tool-data #dlControls #bbColourFoundationControls,#shell-tool-data #dlControls #bbTextureFoundationControls{margin-top:20px!important}
+#shell-tool-data #dlControls #bbPresetControls p{margin:8px 0 0;line-height:1.6}
+#shell-tool-data #dlControls .labOutlineToggle{display:flex;align-items:center;justify-content:flex-start;gap:8px;min-height:26px;margin:0 0 16px!important;padding:3px 0;line-height:1.5}
+#shell-tool-data #dlControls .labCompactOptions input[type=checkbox]{display:inline-block;width:13px!important;height:13px;flex:0 0 13px;margin:0!important;padding:0!important}
+#shell-tool-data #dlControls [hidden]{display:none!important}
 #shell-tool-data #dlControls button,#shell-tool-data #labWorkspace button,#bbAppearanceDialog button{border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:var(--text)!important;font:italic 9.5px/1.5 Arial,sans-serif!important;letter-spacing:.2px!important;text-transform:uppercase;padding:6px 8px!important;min-height:28px!important;transform:none!important}
 #shell-tool-data #dlControls button:hover,#shell-tool-data #labWorkspace button:hover,#bbAppearanceDialog button:hover{background:transparent!important;text-decoration:underline;text-underline-offset:4px}
 #shell-tool-data #dlControls button:focus-visible,#shell-tool-data #labWorkspace button:focus-visible,#bbAppearanceDialog button:focus-visible{outline:2px solid var(--b)!important;outline-offset:3px!important}
