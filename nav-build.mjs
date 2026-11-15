@@ -1,6 +1,7 @@
 import './undo-build.mjs';
 import fs from 'node:fs';
 import {addMeshRepair} from './mesh-repair-build.mjs';
+import {addLabAppearances} from './lab-appearance-build.mjs';
 let html=fs.readFileSync('public/index.html','utf8');
 html=html.replace('</style>','#mtControls p.mtNote:not([id]){display:none!important}\n</style>');
 const marker='</script></body>';
@@ -15,7 +16,8 @@ patchTranslator('points copied at current physical scale. This snapshot stays un
 translator=addMeshRepair(translator);
 const scripts=['section-nav.js','tool-switcher.js','fluid-wordmark.js','studio-heading.js'];
 const extras=scripts.map(path=>fs.readFileSync(path,'utf8'));
-extras.push(fs.readFileSync('mesh-source-compatibility.js','utf8'),translator,fs.readFileSync('mesh-source-diagnostics.js','utf8'),fs.readFileSync('studio-form-integration.js','utf8'),fs.readFileSync('smooth-bowl.js','utf8'),fs.readFileSync('mesh-section-nav.js','utf8'),fs.readFileSync('data-extraction-lab.js','utf8'),fs.readFileSync('data-extraction-batch.js','utf8'),fs.readFileSync('lab-stock-selector.js','utf8'),fs.readFileSync('lab-extraction-viewer.js','utf8'));
+const appearance=addLabAppearances(fs.readFileSync('data-extraction-batch.js','utf8'),fs.readFileSync('lab-extraction-viewer.js','utf8'));
+extras.push(fs.readFileSync('mesh-source-compatibility.js','utf8'),translator,fs.readFileSync('mesh-source-diagnostics.js','utf8'),fs.readFileSync('studio-form-integration.js','utf8'),fs.readFileSync('smooth-bowl.js','utf8'),fs.readFileSync('mesh-section-nav.js','utf8'),fs.readFileSync('data-extraction-lab.js','utf8'),appearance.batch,fs.readFileSync('lab-stock-selector.js','utf8'),appearance.viewer);
 html=html.replace(marker,extras.join('\n')+'\n'+marker);
 fs.mkdirSync('public/src',{recursive:true});
 fs.copyFileSync('src/shell-form.mjs','public/src/shell-form.mjs');
