@@ -4,12 +4,23 @@ const formKeys=['dome','rimround','deeppos','tiplean','crossround','profile'];
 const readStudioForm=()=>Object.fromEntries(formKeys.map(key=>[key,Number($(key).value)]));
 let studioFormHeight=makeStudioForm(readStudioForm());
 for(const key of formKeys)$(key).oninput=()=>{$(key+'val').textContent=$(key).value+'%';studioFormHeight=makeStudioForm(readStudioForm());mark()};
+function roundedBowlHeight(depth,amplitude){if(!Number.isFinite(depth)||!Number.isFinite(amplitude)||amplitude<0)throw new RangeError('Invalid rounded bowl input');const d=Math.max(0,Math.min(1,depth));return d===0?0:-amplitude*d*(2-d)}
+let studioBowlAmplitude=Number($('depth').value)/100;
+const buildBeforeRoundedBowl=$('build').onclick;
+$('build').onclick=async function(...args){
+  studioBowlAmplitude=Number($('depth').value)/100;
+  dep=studioBowlAmplitude;th=Number($('thick').value)/100;
+  studioFormHeight=makeStudioForm(readStudioForm());
+  return await buildBeforeRoundedBowl.apply(this,args);
+};
 const reviewedSurfaceHeight=profileSurfaceHeight;
 profileSurfaceHeight=function(x,y,fallback,thickness){
   const img=sides[0].img;
   const u=studioAxisPosition(x*img.width,y*img.height,[ends[0][0]*img.width,ends[0][1]*img.height],[ends[1][0]*img.width,ends[1][1]*img.height]);
-  const reviewed=profileConstraints?reviewedSurfaceHeight(x,y,fallback,thickness):null;
-  return studioFormHeight({depth:outlineDepth(x,y),u,estimatedHeight:fallback,profileHeight:reviewed,rimHeight:profileConstraints?profileRimHeight(x,y):0});
+  const depth=outlineDepth(x,y);
+  const roundedFallback=roundedBowlHeight(depth,studioBowlAmplitude);
+  const reviewed=profileConstraints?reviewedSurfaceHeight(x,y,roundedFallback,thickness):null;
+  return studioFormHeight({depth,u,estimatedHeight:roundedFallback,profileHeight:reviewed,rimHeight:profileConstraints?profileRimHeight(x,y):0});
 };
 const formSection=$('dome').closest('section');
 formSection.id='studio-shell-form';formSection.querySelector('h2').textContent='04 / SHELL FORM';
@@ -36,7 +47,7 @@ $('settings').onclick=()=>{
   const previousDownload=download;
   download=function(blob,name){
     if(name==='shell-field-settings.json'){
-      blob.text().then(text=>{const settings=JSON.parse(text);settings.shellForm={version:1,parameters:readStudioForm()};previousDownload(new Blob([JSON.stringify(settings,null,2)],{type:'application/json'}),name)}).catch(error=>say('Settings export failed: '+error.message));
+      blob.text().then(text=>{const settings=JSON.parse(text);settings.shellForm={version:2,fallback:'quadratic-distance-rounding',parameters:readStudioForm()};previousDownload(new Blob([JSON.stringify(settings,null,2)],{type:'application/json'}),name)}).catch(error=>say('Settings export failed: '+error.message));
     }else previousDownload(blob,name);
   };
   try{saveSettingsBeforeForm()}finally{download=previousDownload}
