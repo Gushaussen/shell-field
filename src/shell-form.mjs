@@ -10,7 +10,6 @@ export function normalizeForm(input={}) {
   return Object.freeze(result);
 }
 // All heights are fractions of calibrated base-tip length.
-// depth is the normalized silhouette distance field, not an elliptical mask.
 export function createShellForm(input={}) {
   const p=normalizeForm(input);
   return function height({depth,u,estimatedHeight,profileHeight=null,rimHeight=0}) {
@@ -21,9 +20,8 @@ export function createShellForm(input={}) {
     if(d===0)return rimHeight;
     const peak=clamp(.5+p.deeppos*.8,.1,.9);
     const shifted=t<=peak?.5*t/peak:.5+.5*(t-peak)/(1-peak);
-    const original=Math.max(.000001,4*t*(1-t));
-    const moved=Math.max(0,4*shifted*(1-shifted));
-    const positionGain=clamp(Math.sqrt(moved/original),0,2);
+    const ratio=t===0?.5/peak:t===1?.5/(1-peak):(4*shifted*(1-shifted))/(4*t*(1-t));
+    const positionGain=clamp(Math.sqrt(Math.max(0,ratio)),0,2);
     const rounding=Math.pow(d,(.35-p.rimround)*.8);
     const cross=Math.pow(d,(.5-p.crossround)*.8);
     const lean=1+p.tiplean*(2*t-1);

@@ -4,6 +4,9 @@ import {addMeshRepair} from './mesh-repair-build.mjs';
 let html=fs.readFileSync('public/index.html','utf8');
 const marker='</script></body>';
 if(!html.includes(marker))throw Error('Navigation insertion point missing');
+const moduleStart='<script type="module">';
+if(!html.includes(moduleStart))throw Error('Studio module insertion point missing');
+html=html.replace(moduleStart,moduleStart+'\n'+fs.readFileSync('studio-bootstrap.js','utf8'));
 let translator=fs.readFileSync('mesh-translator.js','utf8');
 function patchTranslator(a,b){if(!translator.includes(a))throw Error('Mesh compatibility patch source mismatch: '+a);translator=translator.replace(a,b)}
 patchTranslator("el('mtSource').onclick=()=>{try{","el('mtSource').onclick=()=>{try{const selection=meshTranslatorSelectPairedSource();const raw=selection.points;");
@@ -11,6 +14,8 @@ patchTranslator('points copied at current physical scale. This snapshot stays un
 translator=addMeshRepair(translator);
 const scripts=['section-nav.js','tool-switcher.js','fluid-wordmark.js','studio-heading.js'];
 const extras=scripts.map(path=>fs.readFileSync(path,'utf8'));
-extras.push(fs.readFileSync('mesh-source-compatibility.js','utf8'),translator,fs.readFileSync('mesh-source-diagnostics.js','utf8'));
+extras.push(fs.readFileSync('mesh-source-compatibility.js','utf8'),translator,fs.readFileSync('mesh-source-diagnostics.js','utf8'),fs.readFileSync('studio-form-integration.js','utf8'));
 html=html.replace(marker,extras.join('\n')+'\n'+marker);
+fs.mkdirSync('public/src',{recursive:true});
+fs.copyFileSync('src/shell-form.mjs','public/src/shell-form.mjs');
 fs.writeFileSync('public/index.html',html);
