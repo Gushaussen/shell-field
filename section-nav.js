@@ -1,1 +1,1 @@
-COMPLETE UPDATED section-nav.js: adds 04 / SHELL FORM with a spiral-shell icon between Point Cloud and Inspect & Export; renumbers Inspect & Export to 05.
+COMPLETE KNOWN-GOOD section-nav.js from commit 319eb28: existing five sidebar targets and icons; no Shell Form entry.
