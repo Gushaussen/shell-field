@@ -1,6 +1,8 @@
 function labExportTargetId(mode,format){const targets=mode==='library'?{json:'bbJson',csv:'bbCsv',png:'bbPng'}:{json:'dlJson',csv:'dlCsv',png:'dlPng'};return Object.hasOwn(targets,format)?targets[format]:null}
 (() => {
 const get=id=>document.getElementById(id),layout=get('dlLayout');if(!layout||get('labFinalExport'))return;
+const shapeInput=get('bbShape'),shapeLabel=shapeInput.closest('label');shapeLabel.append(shapeInput);shapeLabel.classList.add('labOutlineToggle');
+for(const paragraph of shapeLabel.closest('section').querySelectorAll(':scope > p'))if(paragraph.textContent.trim()==='Width profile: image-vertical, not an anatomical axis.')paragraph.remove();
 const section=get('dlJson').closest('section');section.querySelector('h2').textContent='05 / INSPECTING AND EXPORTING';
 for(const id of ['bbJson','bbCsv','bbPng','dlJson','dlCsv','dlPng'])get(id).classList.add('labExportBackend');
 const label=document.createElement('label');label.htmlFor='labFinalExportFormat';label.textContent='EXPORT FORMAT';const format=document.createElement('select');format.id='labFinalExportFormat';for(const [value,name] of [['json','ANALYSIS JSON'],['csv','MEASUREMENTS CSV'],['png','INSPECTED VIEW PNG']])format.add(new Option(name,value));label.append(format);
@@ -11,6 +13,8 @@ function update(){const library=mode()==='library';let available=0;for(const opt
 button.onclick=()=>{const backend=target();if(backend&&!backend.disabled)backend.click()};format.onchange=update;
 new MutationObserver(update).observe(layout,{subtree:true,attributes:true,attributeFilter:['disabled','data-lab-mode']});update();
 const style=document.createElement('style');style.textContent=`
+#shell-tool-data #dlControls .labOutlineToggle{display:flex;align-items:center;justify-content:flex-start;gap:8px;margin:2px 0 10px!important}
+#shell-tool-data #dlControls .labOutlineToggle input{display:inline-block;width:auto!important;flex:0 0 auto;margin:0;padding:0}
 #shell-tool-data #dlControls button,#shell-tool-data #labWorkspace button,#bbAppearanceDialog button{border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:var(--text)!important;font:italic 9.5px/1.5 Arial,sans-serif!important;letter-spacing:.2px!important;text-transform:uppercase;padding:6px 8px!important;min-height:28px!important;transform:none!important}
 #shell-tool-data #dlControls button:hover,#shell-tool-data #labWorkspace button:hover,#bbAppearanceDialog button:hover{background:transparent!important;text-decoration:underline;text-underline-offset:4px}
 #shell-tool-data #dlControls button:focus-visible,#shell-tool-data #labWorkspace button:focus-visible,#bbAppearanceDialog button:focus-visible{outline:2px solid var(--b)!important;outline-offset:3px!important}
