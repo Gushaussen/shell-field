@@ -29,10 +29,15 @@ function sampleSmoothBowl(field,x,y){
   const rows=[];for(let j=-1;j<=2;j++)rows.push(cubic(at(ix-1,iy+j),at(ix,iy+j),at(ix+1,iy+j),at(ix+2,iy+j),tx));
   return Math.max(0,cubic(...rows,ty));
 }
+function roundSmoothBowl(value,rounding){
+  if(!Number.isFinite(value)||!Number.isFinite(rounding))throw Error('Invalid bowl roundness');
+  const q=Math.max(0,Math.min(1,value)),power=1.6+3*Math.max(0,Math.min(1,rounding));
+  return 1-Math.pow(1-q,power);
+}
 // Studio binding
 (() => {
   let field=null,parameters=null,amplitude=0;
-  const label=document.createElement('p');label.id='smoothBowlGenerator';label.className='note';label.setAttribute('role','status');label.textContent='Bowl generator: smooth-field v1. Rebuild a separate test cloud to apply.';
+  const label=document.createElement('p');label.id='smoothBowlGenerator';label.className='note';label.setAttribute('role','status');label.textContent='Bowl generator: smooth-field v2 / stronger roundness. Rebuild a separate test cloud to apply.';
   document.getElementById('dome').closest('section').querySelector('h2').after(label);
   const prepareBeforeSmooth=prepareSurfaceFields;
   prepareSurfaceFields=function(){
@@ -56,13 +61,13 @@ function sampleSmoothBowl(field,x,y){
     }
     field=solveSmoothBowl(mask,width,height,source,stepX*img.width/length,stepY*img.height/length);
     Object.assign(field,{minX,minY,stepX,stepY});
-    label.textContent=`Bowl generator: smooth-field v1 / ${width} × ${height} grid / ${field.iterations} solver iterations. Final edge blending remains enabled.`;
+    label.textContent=`Bowl generator: smooth-field v2 / roundness power ${(1.6+3*parameters.rimround).toFixed(2)} / ${width} × ${height} grid / ${field.iterations} solver iterations. Final edge blending remains enabled.`;
   };
   // Replace the complete estimated-height path, bypassing distance-power modifiers.
   profileSurfaceHeight=function(x,y,fallback,thickness){
     if(!field||!parameters)throw Error('Smooth bowl field was not prepared');
-    const q=sampleSmoothBowl(field,(x-field.minX)/field.stepX,(y-field.minY)/field.stepY),rounding=parameters.rimround-.35;
-    const shape=q*(1+rounding*(1-q));
+    const q=sampleSmoothBowl(field,(x-field.minX)/field.stepX,(y-field.minY)/field.stepY);
+    const shape=roundSmoothBowl(q,parameters.rimround);
     const rim=profileConstraints?profileRimHeight(x,y):0,estimated=rim-amplitude*shape;
     if(!profileConstraints)return estimated;
     const reviewed=reviewedSurfaceHeight(x,y,estimated,thickness);
@@ -73,7 +78,7 @@ function sampleSmoothBowl(field,x,y){
     const downloadBeforeSmooth=download;
     download=function(blob,name){
       if(name!=='shell-field-settings.json')return downloadBeforeSmooth(blob,name);
-      blob.text().then(text=>{const data=JSON.parse(text);data.shellForm={version:3,fallback:'smooth-poisson-field-v1',parameters:readStudioForm(),grid:field?{width:field.width,height:field.height,iterations:field.iterations,residual:field.residual}:null};downloadBeforeSmooth(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),name)}).catch(error=>say('Settings export failed: '+error.message));
+      blob.text().then(text=>{const data=JSON.parse(text);data.shellForm={version:4,fallback:'smooth-poisson-field-v2',roundnessMapping:'1-(1-q)^(1.6+3*rimround)',parameters:readStudioForm(),grid:field?{width:field.width,height:field.height,iterations:field.iterations,residual:field.residual}:null};downloadBeforeSmooth(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),name)}).catch(error=>say('Settings export failed: '+error.message));
     };
     try{settingsBeforeSmooth()}finally{download=downloadBeforeSmooth}
   };
