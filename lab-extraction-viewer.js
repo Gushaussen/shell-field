@@ -24,7 +24,11 @@ class LabExtractionViewer {
   const batchOnly=[batchSource,batchColour,batchShape,batchExports];
   function activate(mode){layout.dataset.labMode=mode;stock.setMode(mode);viewer.setMode(mode);for(const node of studioOnly)node.hidden=mode!=='studio';for(const node of batchOnly)node.hidden=mode!=='library';get('dlBatchOpen').setAttribute('aria-pressed',String(mode==='library'));studioButton.setAttribute('aria-pressed',String(mode==='studio'));const annotationNav=get('dlNav')?.querySelectorAll('button')[3];if(annotationNav)annotationNav.hidden=mode!=='studio'}
   get('dlBatchOpen').onclick=()=>activate('library');studioButton.onclick=()=>activate('studio');
-  dialog.remove();
+  // The batch controller still resolves legacy controls by document ID.
+  // Retain its non-presentational nodes while visible controls live in the panes.
+  dialog.hidden=true;
+  dialog.style.display='none';
+  dialog.setAttribute('aria-hidden','true');
   const style=document.createElement('style');style.textContent=`
 #dlLayout #labWorkspace{display:grid;grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:14px;min-width:0;min-height:0;height:100%}
 #labWorkspace .labPane{display:flex;flex-direction:column;min-height:0;min-width:0;overflow:hidden;padding:0;border:1px solid var(--l);border-radius:17px;background:var(--panel)}
