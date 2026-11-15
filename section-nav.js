@@ -1,1 +1,1 @@
-COMPLETE KNOWN-GOOD section-nav.js from commit 319eb28: existing five sidebar targets and icons; no Shell Form entry.
+EXACT COMPLETE section-nav.js retrieved from commit 319eb28 (file SHA 52cbfcf227d927f9cb29402ff50a371ad3009d1e): full five-target sidebar navigation implementation.
