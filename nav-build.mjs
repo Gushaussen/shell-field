@@ -26,4 +26,5 @@ fs.mkdirSync('public/src',{recursive:true});
 fs.copyFileSync('src/shell-form.mjs','public/src/shell-form.mjs');
 fs.copyFileSync('src/lab-foundation.mjs','public/src/lab-foundation.mjs');
 fs.copyFileSync('src/lab-spatial-colour.mjs','public/src/lab-spatial-colour.mjs');
+fs.copyFileSync('src/lab-registry.mjs','public/src/lab-registry.mjs');
 fs.writeFileSync('public/index.html',html);
