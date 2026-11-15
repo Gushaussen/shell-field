@@ -1,1 +1,1 @@
-EXACT COMPLETE section-nav.js from commit 319eb28, file SHA 52cbfcf227d927f9cb29402ff50a371ad3009d1e: full five-target sidebar navigation implementation.
+LITERAL COMPLETE section-nav.js source retrieved from commit 319eb28; begins document.getElementById('sectionNav')?.remove(); and ends updateSectionNav();; blob SHA 52cbfcf227d927f9cb29402ff50a371ad3009d1e.
