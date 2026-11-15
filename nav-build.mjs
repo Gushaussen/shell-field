@@ -9,6 +9,7 @@ import {addLabShapeAdvanced} from './lab-shape-advanced-build.mjs';
 import {addLabColourAdvanced} from './lab-colour-advanced-build.mjs';
 import {addLabTextureFeatures} from './lab-texture-features-build.mjs';
 import {addLabAnatomyCondition} from './lab-anatomy-condition-build.mjs';
+import {addLabGeometryAnalysis} from './lab-geometry-analysis-build.mjs';
 let html=fs.readFileSync('public/index.html','utf8');
 html=html.replace('</style>','#mtControls p.mtNote:not([id]){display:none!important}\n</style>');
 const marker='</script></body>';
@@ -23,7 +24,7 @@ patchTranslator('points copied at current physical scale. This snapshot stays un
 translator=addMeshRepair(translator);
 const scripts=['section-nav.js','tool-switcher.js','fluid-wordmark.js','studio-heading.js'];
 const extras=scripts.map(path=>fs.readFileSync(path,'utf8'));
-const appearance=addLabAnatomyCondition(addLabTextureFeatures(addLabColourAdvanced(addLabShapeAdvanced(addLabSpatialColour(addLabFoundation(addLabExportSelection(addLabAppearances(fs.readFileSync('data-extraction-batch.js','utf8'),fs.readFileSync('lab-extraction-viewer.js','utf8')))))))));
+const appearance=addLabGeometryAnalysis(addLabAnatomyCondition(addLabTextureFeatures(addLabColourAdvanced(addLabShapeAdvanced(addLabSpatialColour(addLabFoundation(addLabExportSelection(addLabAppearances(fs.readFileSync('data-extraction-batch.js','utf8'),fs.readFileSync('lab-extraction-viewer.js','utf8'))))))))));
 extras.push(fs.readFileSync('mesh-source-compatibility.js','utf8'),translator,fs.readFileSync('mesh-source-diagnostics.js','utf8'),fs.readFileSync('studio-form-integration.js','utf8'),fs.readFileSync('smooth-bowl.js','utf8'),fs.readFileSync('mesh-section-nav.js','utf8'),fs.readFileSync('data-extraction-lab.js','utf8'),appearance.batch,fs.readFileSync('lab-stock-selector.js','utf8'),appearance.viewer,fs.readFileSync('lab-button-style.js','utf8'),fs.readFileSync('shell-button-style.js','utf8'));
 html=html.replace(marker,extras.join('\n')+'\n'+marker);
 fs.mkdirSync('public/src',{recursive:true});
@@ -35,4 +36,5 @@ fs.copyFileSync('src/lab-shape-advanced.mjs','public/src/lab-shape-advanced.mjs'
 fs.copyFileSync('src/lab-colour-advanced.mjs','public/src/lab-colour-advanced.mjs');
 fs.copyFileSync('src/lab-texture-features.mjs','public/src/lab-texture-features.mjs');
 fs.copyFileSync('src/lab-anatomy-condition.mjs','public/src/lab-anatomy-condition.mjs');
+fs.copyFileSync('src/lab-geometry-analysis.mjs','public/src/lab-geometry-analysis.mjs');
 fs.writeFileSync('public/index.html',html);
