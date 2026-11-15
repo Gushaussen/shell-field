@@ -14,7 +14,7 @@ patchTranslator('points copied at current physical scale. This snapshot stays un
 translator=addMeshRepair(translator);
 const scripts=['section-nav.js','tool-switcher.js','fluid-wordmark.js','studio-heading.js'];
 const extras=scripts.map(path=>fs.readFileSync(path,'utf8'));
-extras.push(fs.readFileSync('mesh-source-compatibility.js','utf8'),translator,fs.readFileSync('mesh-source-diagnostics.js','utf8'),fs.readFileSync('studio-form-integration.js','utf8'));
+extras.push(fs.readFileSync('mesh-source-compatibility.js','utf8'),translator,fs.readFileSync('mesh-source-diagnostics.js','utf8'),fs.readFileSync('studio-form-integration.js','utf8'),fs.readFileSync('smooth-bowl.js','utf8'));
 html=html.replace(marker,extras.join('\n')+'\n'+marker);
 fs.mkdirSync('public/src',{recursive:true});
 fs.copyFileSync('src/shell-form.mjs','public/src/shell-form.mjs');
