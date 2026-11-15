@@ -1,0 +1,11 @@
+import './nav-build.mjs';
+import fs from 'node:fs';
+let html=fs.readFileSync('public/index.html','utf8');
+const hook="let secret='',records=[]";
+if(html.split(hook).length!==2)throw Error('Diagram Lab bridge insertion point mismatch');
+html=html.replace(hook,"window.shellDiagramRead=()=>typeof working==='undefined'||working||!run?null:({id:run.id,sourceRevision:run.sourceRevision,results:jobs.filter(j=>j.status==='success').map(j=>({id:j.id,name:j.name,species:j.species,side:j.side,metrics:j.metrics,widthProfile:j.widthProfile}))});\n"+hook);
+const end=html.lastIndexOf('</body>');
+if(end<0)throw Error('Diagram document insertion point missing');
+html=html.slice(0,end)+'<script type="module" src="./diagram-page.js"></script>\n'+html.slice(end);
+fs.copyFileSync('diagram-page.js','public/diagram-page.js');
+fs.writeFileSync('public/index.html',html);

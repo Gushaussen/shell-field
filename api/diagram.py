@@ -1,106 +1,81 @@
 import io
+import math
+import threading
 import matplotlib
-matplotlib.use("Agg")
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 from flask import Flask, Response, jsonify, request
-
 app = Flask(__name__)
-CHARTS = {"bar", "strip", "box", "violin", "hist", "kde", "scatter", "line", "heatmap", "correlation"}
-PALETTES = {"cobalt": ["#0648ff", "#4d7dff", "#98b3ff", "#001a4d"]}
-
-def _frame(data):
-    if not isinstance(data, list) or not data:
-        raise ValueError("Diagram data must contain at least one record")
-    if len(data) > 20000:
-        raise ValueError("Diagram input exceeds the 20,000-record limit")
-    frame = pd.DataFrame(data)
-    if frame.empty:
-        raise ValueError("Diagram data is empty")
-    return frame
-
-def _render(spec, frame):
-    chart = spec.get("chart")
-    if chart not in CHARTS:
-        raise ValueError("Unsupported diagram type")
-    x = spec.get("x") or ""
-    y = spec.get("y") or ""
-    hue = spec.get("hue") or None
-    palette = PALETTES.get(spec.get("palette"), PALETTES["cobalt"])
-    sns.set_theme(style="whitegrid", font_scale=0.8)
-    fig, ax = plt.subplots(figsize=(10, 6))
-    try:
-        if chart == "bar":
-            sns.barplot(data=frame, x=x, y=y, hue=hue, palette=palette, ax=ax)
-        elif chart == "strip":
-            sns.stripplot(data=frame, x=x, y=y, hue=hue, palette=palette, ax=ax)
-        elif chart == "box":
-            sns.boxplot(data=frame, x=x, y=y, hue=hue, palette=palette, ax=ax)
-        elif chart == "violin":
-            sns.violinplot(data=frame, x=x, y=y, hue=hue, palette=palette, ax=ax)
-        elif chart == "hist":
-            sns.histplot(data=frame, x=y, hue=hue, palette=palette, ax=ax)
-        elif chart == "kde":
-            sns.kdeplot(data=frame, x=y, hue=hue, palette=palette, fill=True, ax=ax)
-        elif chart == "scatter":
-            second = spec.get("secondMetric")
-            if not second:
-                raise ValueError("Scatter diagrams require a second metric")
-            wide = frame.pivot_table(index=["specimenId", "side"], columns="quantity", values="value", aggfunc="first").reset_index()
-            if second not in wide or y not in wide:
-                raise ValueError("Selected metrics are not available together")
-            sns.scatterplot(data=wide, x=y, y=second, hue=hue, palette=palette, ax=ax)
-            ax.set_ylabel(second)
-        elif chart == "line":
-            sns.lineplot(data=frame, x=x, y=y, hue=hue, palette=palette, ax=ax)
-        elif chart == "heatmap":
-            table = frame.pivot_table(index=x, columns=hue or "quantity", values=y, aggfunc="mean")
-            if table.empty:
-                raise ValueError("Not enough records for a heatmap")
-            sns.heatmap(table, cmap=sns.light_palette(palette[0], as_cmap=True), ax=ax)
-        elif chart == "correlation":
-            second = spec.get("secondMetric")
-            if not second:
-                raise ValueError("Correlation diagrams require a second metric")
-            wide = frame.pivot_table(index=["specimenId", "side"], columns="quantity", values="value", aggfunc="first")
-            if y not in wide or second not in wide:
-                raise ValueError("Selected metrics are not available together")
-            correlation = wide[[y, second]].corr()
-            sns.heatmap(correlation, annot=True, cmap=sns.light_palette(palette[0], as_cmap=True), ax=ax)
-        ax.set_title(spec.get("title") or "Shell Field library diagram")
-        ax.set_xlabel(spec.get("xLabel") or x)
-        ax.set_ylabel(spec.get("yLabel") or y)
-        fig.tight_layout()
-        output = io.BytesIO()
-        if spec.get("format") == "svg":
-            fig.savefig(output, format="svg", bbox_inches="tight")
-            mime = "image/svg+xml"
+app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
+lock = threading.Lock()
+METRICS = {'area', 'boundary', 'width', 'height', 'aspect', 'holes'}
+def number(value):
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+def render(payload):
+    chart = payload.get('chart')
+    metric = payload.get('metric')
+    output_format = payload.get('format', 'png')
+    if chart not in {'bar', 'profile'} or metric not in METRICS or output_format not in {'png', 'svg'}:
+        raise ValueError('Unsupported diagram settings')
+    results = payload.get('results')
+    if not isinstance(results, list) or not 1 <= len(results) <= 200:
+        raise ValueError('Choose between 1 and 200 analysed sides')
+    rows = []
+    expected_unit = str(payload.get('unit', ''))[:40]
+    for index, job in enumerate(results):
+        if not isinstance(job, dict):
+            raise ValueError('Invalid analysis record')
+        label = str(job.get('name') or job.get('id') or index)[:100] + ' / ' + str(job.get('side', ''))[:20] + f' [{index+1}]'
+        if chart == 'bar':
+            metrics = job.get('metrics') or {}
+            value = metrics.get(metric)
+            unit = 'dimensionless' if metric in {'aspect', 'holes'} else metrics.get('unit', 'px')
+            if number(value) and unit == expected_unit:
+                rows.append({'specimen': label, 'value': value})
         else:
-            fig.savefig(output, format="png", dpi=180, bbox_inches="tight")
-            mime = "image/png"
-        return output.getvalue(), mime
-    finally:
-        plt.close(fig)
-
-@app.after_request
-def _headers(response):
-    response.headers["X-Content-Type-Options"] = "nosniff"
-    return response
-
-@app.route("/api/diagram", methods=["POST", "OPTIONS"])
+            points = job.get('widthProfile') or []
+            if not isinstance(points, list) or len(points) > 2000:
+                raise ValueError('Invalid or oversized width profile')
+            for point in points:
+                if isinstance(point, dict) and number(point.get('fraction')) and number(point.get('width')) and point.get('unit', 'px') == expected_unit:
+                    rows.append({'specimen': label, 'position': point['fraction'], 'value': point['width']})
+    if not rows or len(rows) > 20000:
+        raise ValueError('No usable values for this selection, or more than 20,000 points')
+    frame = pd.DataFrame(rows)
+    with lock:
+        sns.set_theme(style='whitegrid')
+        fig, ax = plt.subplots(figsize=(12, 7))
+        try:
+            if chart == 'bar':
+                sns.barplot(data=frame, x='specimen', y='value', color='#0648ff', errorbar=None, ax=ax)
+                ax.tick_params(axis='x', labelrotation=65)
+                ax.set_xlabel('Analysed library side')
+            else:
+                sns.lineplot(data=frame, x='position', y='value', hue='specimen', estimator=None, errorbar=None, ax=ax)
+                ax.set_xlabel('Image-vertical profile position')
+            suffix = ' squared' if chart == 'bar' and metric == 'area' else ''
+            ax.set_ylabel(('Width' if chart == 'profile' else metric) + ' / ' + expected_unit + suffix)
+            ax.set_title(str(payload.get('title', 'Shell library diagram'))[:160], wrap=True)
+            caption = 'Library-derived visual artifact | batch ' + str(payload.get('batchId', ''))[:36] + ' | revision ' + str(payload.get('revision', ''))[:12]
+            fig.text(0.02, 0.01, caption, fontsize=7)
+            fig.tight_layout(rect=(0, 0.05, 1, 1))
+            stream = io.BytesIO()
+            fig.savefig(stream, format=output_format, dpi=180, bbox_inches='tight')
+            return stream.getvalue(), 'image/svg+xml' if output_format == 'svg' else 'image/png'
+        finally:
+            plt.close(fig)
+@app.route('/api/diagram', methods=['POST'])
 def diagram():
-    if request.method == "OPTIONS":
-        return Response(status=204)
     try:
-        payload = request.get_json(silent=True) or {}
-        spec = payload.get("spec")
-        if not isinstance(spec, dict):
-            raise ValueError("Diagram specification is missing")
-        frame = _frame(payload.get("data"))
-        image, mime = _render(spec, frame)
-        return Response(image, mimetype=mime)
-    except (ValueError, KeyError, TypeError) as error:
-        return jsonify({"error": str(error)}), 400
+        payload = request.get_json(silent=True)
+        if not isinstance(payload, dict):
+            raise ValueError('Expected a diagram request')
+        image, mime = render(payload)
+        return Response(image, mimetype=mime, headers={'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff'})
+    except (ValueError, TypeError, KeyError) as error:
+        return jsonify(error=str(error)), 400
     except Exception:
-        return jsonify({"error": "Diagram generation failed"}), 500
+        app.logger.exception('Diagram rendering failed')
+        return jsonify(error='Diagram rendering failed; inspect deployment logs'), 500
