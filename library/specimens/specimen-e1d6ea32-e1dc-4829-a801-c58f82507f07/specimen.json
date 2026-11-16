@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "specimen-e1d6ea32-e1dc-4829-a801-c58f82507f07",
+  "name": "BM009",
+  "species": "Mytilus edulis",
+  "location": "Agerø Limfjord",
+  "notes": "",
+  "lengthMm": 45,
+  "pointCount": 300512,
+  "createdAt": "2026-11-16T08:29:55.714Z",
+  "approximateGeometry": true,
+  "archive": {
+    "encoding": "gzip-json",
+    "sha256": "5181a75218221df70253b19bb8e1b193dd4b94b8d8a6f15b8aa1fd5e73fe44d1",
+    "bytes": 4515910,
+    "parts": [
+      {
+        "path": "archive-000.bin",
+        "sha": "2e1a1a592164dcb245fdc15b0f016f245c429895",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-001.bin",
+        "sha": "5da0ad7d852e079db77a03768054565d41b00716",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-002.bin",
+        "sha": "3ce0f4fd444fb20af9a29019b0e8628db371b90b",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-003.bin",
+        "sha": "4efb0f49c06542129ef422a2429824e57861a100",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-004.bin",
+        "sha": "9da193830aaadf2130205b009b1b7e80c78ac60d",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-005.bin",
+        "sha": "76d75db4641185dd7fa517d02482f2404db733be",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-006.bin",
+        "sha": "3eb9be20940ec6d897927b9eb7b6758546756be6",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-007.bin",
+        "sha": "96abee5fdcafab3171235ee6e7078081b10ee8f3",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-008.bin",
+        "sha": "f42dd891895b01200c1502cb776b6c1a015980b0",
+        "bytes": 321606
+      }
+    ]
+  }
+}
