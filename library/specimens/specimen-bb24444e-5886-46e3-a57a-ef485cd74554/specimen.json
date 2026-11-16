@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "specimen-bb24444e-5886-46e3-a57a-ef485cd74554",
+  "name": "Test Blue Mussle",
+  "species": "Mytilus edulis",
+  "location": "Agerø Limfjord",
+  "notes": "",
+  "lengthMm": 42,
+  "pointCount": 300512,
+  "createdAt": "2026-11-16T10:17:20.175Z",
+  "approximateGeometry": true,
+  "archive": {
+    "encoding": "gzip-json",
+    "sha256": "203835e6eb9d5d0a66f572b7040174e32dd063ed8cf524b2dbeeaef4b97ae83b",
+    "bytes": 3916027,
+    "parts": [
+      {
+        "path": "archive-000.bin",
+        "sha": "4b64c5807812b8644ceeb77e3bd2bae22dd3616e",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-001.bin",
+        "sha": "afbb3d05956a598d82cba3080496c76bc6568b91",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-002.bin",
+        "sha": "12cd7f7df756ef453488178326a629f9cacf7eca",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-003.bin",
+        "sha": "a0c32c9f6797fd16b9cba11820f630509e907ad5",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-004.bin",
+        "sha": "0d5d9e624a2b5e0ad91b030eb243cd464ff24f27",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-005.bin",
+        "sha": "b6ed7736583cdbdd2ab12033718ba52e878dfcbc",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-006.bin",
+        "sha": "a88b4879ebb364847bde20dba94ffa9e671abd50",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-007.bin",
+        "sha": "5030c152c8402db245bd123dbe2fe7533317dc6a",
+        "bytes": 246011
+      }
+    ]
+  }
+}
