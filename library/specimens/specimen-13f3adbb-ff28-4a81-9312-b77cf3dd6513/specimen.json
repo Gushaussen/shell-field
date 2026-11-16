@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "id": "specimen-13f3adbb-ff28-4a81-9312-b77cf3dd6513",
+  "name": "CC001",
+  "species": "Cerastoderma edule",
+  "location": "Agerø Limfjord",
+  "notes": "",
+  "lengthMm": 48,
+  "pointCount": 300512,
+  "createdAt": "2026-11-16T17:42:45.710Z",
+  "approximateGeometry": true,
+  "archive": {
+    "encoding": "gzip-json",
+    "sha256": "7ecb5a03453bfd2eb01a42697e15021b0cda5078242e00840f82b5c33b66d96d",
+    "bytes": 7801364,
+    "parts": [
+      {
+        "path": "archive-000.bin",
+        "sha": "43b0b4896c870c260450e6263b3f9858e8342474",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-001.bin",
+        "sha": "e084c8cb3e781a3a6e078673812c6a917723706e",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-002.bin",
+        "sha": "35c8ed0613e9bc17e34a9f28ae652baedc6d6967",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-003.bin",
+        "sha": "d26acc1b8693d417761410adb78dbea91ccc46a3",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-004.bin",
+        "sha": "372606670f5bdc6f9e4efb6c7b8113d2f125404e",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-005.bin",
+        "sha": "b4744792b1e70fbcb587e58d6b715ac97db3ce89",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-006.bin",
+        "sha": "af73009fd504ac1560347250ed2514c6012d9c22",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-007.bin",
+        "sha": "4a27d4203d40bdd6dd8b2cdc0e8fc35ec9b8620b",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-008.bin",
+        "sha": "031e7e7fa002a0f31112e2626221ffa3567af6ee",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-009.bin",
+        "sha": "35e3e080deef522cc31a99e7036bba371edfd4c7",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-010.bin",
+        "sha": "831ca55b043e29dc80918461c5b77d52ec50b4c9",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-011.bin",
+        "sha": "f40a9751592a15fb6d9121da89dc5daf8c0e2fa4",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-012.bin",
+        "sha": "3d7c8c0110e0389b9405e8523da83609f8afb168",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-013.bin",
+        "sha": "05a93b31989e68b24417bd9ef643cb79fe31f5f8",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-014.bin",
+        "sha": "3cd5a844079aa0a5a99100dcad2eb1346aa62481",
+        "bytes": 461332
+      }
+    ]
+  }
+}
