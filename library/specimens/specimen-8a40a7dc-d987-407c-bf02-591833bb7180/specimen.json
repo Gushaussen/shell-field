@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "specimen-8a40a7dc-d987-407c-bf02-591833bb7180",
+  "name": "RC001",
+  "species": "unidentified razor clam",
+  "location": "Agerø Limfjord",
+  "notes": "",
+  "lengthMm": 150,
+  "pointCount": 300512,
+  "createdAt": "2026-11-16T17:35:20.941Z",
+  "approximateGeometry": true,
+  "archive": {
+    "encoding": "gzip-json",
+    "sha256": "96536df955aedb885414cadc49739ac8bea122d3d5d7b6474200dfaec84a3b25",
+    "bytes": 4977686,
+    "parts": [
+      {
+        "path": "archive-000.bin",
+        "sha": "c888e051a56d999c69c27bc5518f401684134460",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-001.bin",
+        "sha": "688e15f4782fbdb236ea600cb189ea93a84ef284",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-002.bin",
+        "sha": "9a75682a6323056965061dda6dc6c415fa29ab19",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-003.bin",
+        "sha": "6c5a84b7d0fff8d63e3f2b166d2e11e0b7701b74",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-004.bin",
+        "sha": "b50c088508220ed301f1f356a41390cdf6b819fe",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-005.bin",
+        "sha": "8c0c9ef208bbf0c7b5664133746704c4915fad2c",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-006.bin",
+        "sha": "f08cf69e67302ea42c6b8ed151a2657e532a4bb2",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-007.bin",
+        "sha": "71e02e2ed70d175833672a629f146dd6e1c9f8f4",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-008.bin",
+        "sha": "976d4486d0b13be6fb98cb2e17c7200683283587",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-009.bin",
+        "sha": "59933eb6208f7c2564e89555e9fc0a2901e0acc5",
+        "bytes": 259094
+      }
+    ]
+  }
+}
