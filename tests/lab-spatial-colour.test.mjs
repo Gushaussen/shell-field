@@ -1,0 +1,10 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {labColourGradients,labColourPatches} from '../src/lab-spatial-colour.mjs';
+const image=(w,h,fn)=>new Uint8ClampedArray(Array.from({length:w*h},(_,i)=>[...fn(i%w,Math.floor(i/w)),255]).flat());
+test('uniform gradient has zero magnitude and undefined direction',()=>{const r=labColourGradients(image(3,3,()=>[20,20,20]),new Uint8Array(9).fill(1),3,3).data;assert.equal(r.meanMagnitude,0);assert.equal(r.dominantGradientAxisDegrees,null)});
+test('linear horizontal gradient',()=>{const r=labColourGradients(image(5,5,x=>[10*x,10*x,10*x]),new Uint8Array(25).fill(1),5,5).data;assert.equal(r.meanMagnitude,10);assert.equal(r.dominantGradientAxisDegrees,0);assert.equal(r.directionalCoherence,1)});
+test('mask boundaries excluded from gradient',()=>{assert.throws(()=>labColourGradients(image(3,3,()=>[0,0,0]),new Uint8Array([0,0,0,0,1,0,0,0,0]),3,3))});
+test('one uniform connected patch',()=>{const r=labColourPatches(image(4,4,()=>[200,100,50]),new Uint8Array(16).fill(1),4,4).data;assert.equal(r.componentsFound,1);assert.equal(r.components[0].areaPixels,16);assert.deepEqual(r.components[0].centroid,[.5,.5])});
+test('two colours have adjacency',()=>{const r=labColourPatches(image(4,2,x=>x<2?[0,0,0]:[255,255,255]),new Uint8Array(8).fill(1),4,2,1).data;assert.equal(r.componentsFound,2);assert.equal(r.adjacency[0].sharedBoundaryPixelEdges,2)});
+test('disconnected same-colour regions remain separate',()=>{const r=labColourPatches(image(3,1,()=>[100,100,100]),new Uint8Array([1,0,1]),3,1,1).data;assert.equal(r.componentsFound,2)});
+test('thresholds and truncation are explicit',()=>{const r=labColourPatches(image(4,1,x=>[x*64,0,0]),new Uint8Array(4).fill(1),4,1,1,2).data;assert.equal(r.componentsRetained,2);assert.equal(r.omittedByLimit,2)});
+test('transparent pixels excluded',()=>{const rgba=image(2,1,()=>[0,0,0]);rgba[3]=0;assert.equal(labColourPatches(rgba,new Uint8Array(2).fill(1),2,1,1).data.maskedPixelCount,1)});
