@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "id": "specimen-9c29c52d-b00e-43a6-89b9-9c2c37d5978c",
+  "name": "OYS001",
+  "species": "Magallana gigas",
+  "location": "Agerø Limfjord",
+  "notes": "",
+  "lengthMm": 118,
+  "pointCount": 300512,
+  "createdAt": "2026-11-16T13:24:46.773Z",
+  "approximateGeometry": true,
+  "archive": {
+    "encoding": "gzip-json",
+    "sha256": "f70232fbd293efd11213dd601d3bb499e8a0aa3f7ea38ac9d6bcd69654527b2b",
+    "bytes": 5342283,
+    "parts": [
+      {
+        "path": "archive-000.bin",
+        "sha": "b15411d1dfb1d92badfdca30c9859a601b017126",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-001.bin",
+        "sha": "19b1e296e8fa042da7749477d25a1437bbaa4c46",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-002.bin",
+        "sha": "56d5d0b11e71920c2b22e8634345bedd7200a762",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-003.bin",
+        "sha": "7d647adc66b8fa23d9e2343edfef12fe61774478",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-004.bin",
+        "sha": "e7f41ffdf4b112712f3d6cb8353f1cf7851c6bca",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-005.bin",
+        "sha": "6a709b7b04f8823befbd72e1bcf6c57366ee90a3",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-006.bin",
+        "sha": "a135825604d61cfe4328213ed161b44c05f5e073",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-007.bin",
+        "sha": "3af249dc7d0e197ffd1ad09790c01c72b023cf50",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-008.bin",
+        "sha": "8f05ff6fb1e74f82529000b0a4d4e9d1a8cd4606",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-009.bin",
+        "sha": "8ceb33500c3b72bc076209e668fadb754477ab3d",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-010.bin",
+        "sha": "30aeda8be5b0f9bc003ec711e82031a94d2f1895",
+        "bytes": 99403
+      }
+    ]
+  }
+}
