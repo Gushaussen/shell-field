@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "id": "specimen-d400c6af-9bcf-49fa-a851-7c69d8a41303",
+  "name": "BM002",
+  "species": "Mytilus edulis",
+  "location": "",
+  "notes": "",
+  "lengthMm": 100,
+  "pointCount": 300512,
+  "createdAt": "2026-11-18T16:21:15.281Z",
+  "approximateGeometry": true,
+  "archive": {
+    "encoding": "gzip-json",
+    "sha256": "3e765755f548c67c8ed73181c26181767ff5fbc1e260bf047e4e3c04aaa410b2",
+    "bytes": 6969795,
+    "parts": [
+      {
+        "path": "archive-000.bin",
+        "sha": "09b1c9bccf07249c63a6ec82e26bb20d283dec1c",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-001.bin",
+        "sha": "1216a4ebd6f59a3af63f80508560d32b2240d9a0",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-002.bin",
+        "sha": "50c1fc3ab13701c99bac8fa442ced7b05d685b30",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-003.bin",
+        "sha": "300dd1eb0bcbe0ec4835199155f3031668673f67",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-004.bin",
+        "sha": "8669192546f5c923034a76dda188932f548c08dd",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-005.bin",
+        "sha": "a88cf74bbdb0c87df820102fc5dddbd4439b710e",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-006.bin",
+        "sha": "b516d6d9de78d52ff986927d78b95455ebab5fa1",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-007.bin",
+        "sha": "06120a44810054743b6d16d634e30728208306f4",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-008.bin",
+        "sha": "49093d98b7902883f5ca38f987a743e32651b923",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-009.bin",
+        "sha": "fd8175b3952e0ab340c3cc0e1aa66b9ef72f9070",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-010.bin",
+        "sha": "0ad5f1d94b6edaf414b1543b103e6a50fab9cb74",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-011.bin",
+        "sha": "5818095b2886f8b0e386aee17dbe896eaebd706f",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-012.bin",
+        "sha": "2eca825868594c13f6247aba24a091993684ffd2",
+        "bytes": 524288
+      },
+      {
+        "path": "archive-013.bin",
+        "sha": "6215827edd74e56998c56c15662c12e234b3dea5",
+        "bytes": 154051
+      }
+    ]
+  }
+}
